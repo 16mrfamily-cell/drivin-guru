@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Drivin Guru — Learn The Safe Way, Right Away</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --lime:#CAFF00;
+  --lime-dark:#a8d400;
+  --ink:#0A0A0A;
+  --ink2:#141414;
+  --ink3:#1e1e1e;
+  --white:#FAFAFA;
+  --gray:#888;
+  --gray2:#555;
+  --border:rgba(255,255,255,.08);
+  --font-d:'Syne',sans-serif;
+  --font-b:'Plus Jakarta Sans',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{font-family:var(--font-b);background:var(--ink);color:var(--white);overflow-x:hidden;cursor:none}
+
+/* CURSOR */
+#cur{width:12px;height:12px;background:var(--lime);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .12s,background .2s,width .2s,height .2s}
+#cur.h{width:40px;height:40px;background:transparent;border:2px solid var(--lime)}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:20px 52px;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+.nav-logo{display:flex;align-items:center;gap:12px;text-decoration:none}
+/* DG mark */
+.dg-mark{width:38px;height:38px;background:var(--lime);border-radius:6px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.dg-mark svg{width:22px;height:22px}
+.nav-brand{font-family:var(--font-d);font-size:1.2rem;font-weight:800;color:var(--white);letter-spacing:2px;text-transform:uppercase}
+.nav-brand span{color:var(--lime)}
+.nav-links{display:flex;align-items:center;gap:32px;list-style:none}
+.nav-links a{font-family:var(--font-d);font-size:.82rem;font-weight:600;letter-spacing:2px;color:rgba(255,255,255,.5);text-decoration:none;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--lime)}
+.nav-book{background:var(--lime)!important;color:var(--ink)!important;padding:10px 22px!important;border-radius:4px;font-weight:700!important}
+.nav-book:hover{background:var(--white)!important}
+.nav-wa{background:#25D366!important;color:var(--white)!important;padding:10px 18px!important;border-radius:4px;font-weight:700!important;display:flex!important;align-items:center!important;gap:7px!important}
+.nav-wa:hover{background:#1db954!important;color:var(--white)!important}
+
+/* HERO */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 52px 72px;position:relative;overflow:hidden;background:var(--ink)}
+
+/* Big background text */
+.hero-bg-text{position:absolute;top:50%;left:-20px;transform:translateY(-55%);font-family:var(--font-d);font-size:clamp(14rem,28vw,26rem);font-weight:800;line-height:.85;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.055);pointer-events:none;white-space:nowrap;letter-spacing:-4px;user-select:none}
+
+/* Lime diagonal slash */
+.hero-slash{position:absolute;top:0;right:0;width:42%;height:100%;background:var(--lime);clip-path:polygon(18% 0,100% 0,100% 100%,0% 100%);z-index:0}
+.hero-slash-inner{position:absolute;top:0;right:0;width:42%;height:100%;display:flex;align-items:center;justify-content:center;z-index:1;clip-path:polygon(18% 0,100% 0,100% 100%,0% 100%)}
+.hero-slash-inner svg{width:min(280px,30vw);filter:drop-shadow(0 20px 60px rgba(0,0,0,.3))}
+
+.hero-content{position:relative;z-index:2;max-width:58%}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:8px;font-family:var(--font-d);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--lime);margin-bottom:28px;animation:fadeUp .6s ease both}
+.hero-eyebrow::before{content:'';width:32px;height:2px;background:var(--lime)}
+
+h1.hero-title{font-family:var(--font-d);font-size:clamp(4rem,9.5vw,9rem);font-weight:800;line-height:.88;letter-spacing:-2px;color:var(--white);animation:fadeUp .6s .1s ease both}
+h1.hero-title .lime{color:var(--lime);display:block}
+h1.hero-title .outline{-webkit-text-stroke:2px var(--lime);color:transparent;display:block}
+
+.hero-tagline{margin-top:24px;font-size:1rem;color:rgba(255,255,255,.45);letter-spacing:3px;text-transform:uppercase;font-family:var(--font-d);font-weight:500;animation:fadeUp .6s .2s ease both}
+
+.hero-row{display:flex;align-items:center;gap:24px;margin-top:44px;animation:fadeUp .6s .3s ease both;flex-wrap:wrap}
+.btn-lime{background:var(--lime);color:var(--ink);font-family:var(--font-d);font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:16px 36px;border-radius:4px;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:10px;transition:background .2s,transform .15s}
+.btn-lime:hover{background:var(--white);transform:translateY(-2px)}
+.btn-wired{background:transparent;color:var(--white);font-family:var(--font-d);font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:15px 36px;border-radius:4px;border:1px solid rgba(255,255,255,.25);text-decoration:none;transition:border-color .2s,color .2s}
+.btn-wired:hover{border-color:var(--lime);color:var(--lime)}
+.btn-wa-hero{background:#25D366;color:var(--white);font-family:var(--font-d);font-size:.9rem;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:16px 28px;border-radius:4px;border:none;text-decoration:none;display:inline-flex;align-items:center;gap:9px;transition:background .2s,transform .15s}
+.btn-wa-hero:hover{background:#1db954;transform:translateY(-2px)}
+
+.hero-stats{display:flex;gap:48px;margin-top:60px;padding-top:40px;border-top:1px solid var(--border);animation:fadeUp .6s .4s ease both;flex-wrap:wrap}
+.h-stat .n{font-family:var(--font-d);font-size:2.4rem;font-weight:800;color:var(--lime);line-height:1}
+.h-stat .l{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--gray);margin-top:5px;font-weight:500}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* MARQUEE */
+.marquee-wrap{background:var(--lime);padding:13px 0;overflow:hidden;white-space:nowrap}
+.marquee-track{display:inline-flex;gap:0;animation:marquee 18s linear infinite}
+.marquee-item{font-family:var(--font-d);font-size:.82rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--ink);padding:0 32px;display:flex;align-items:center;gap:16px}
+.marquee-item::after{content:'✦';font-size:.6rem;opacity:.5}
+@keyframes marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* COURSES */
+#courses{padding:120px 52px;background:var(--ink)}
+.section-eyebrow{font-family:var(--font-d);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--lime);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.section-eyebrow::before{content:'';width:24px;height:2px;background:var(--lime)}
+h2.section-title{font-family:var(--font-d);font-size:clamp(2.4rem,5vw,4rem);font-weight:800;color:var(--white);line-height:1;letter-spacing:-1px;margin-bottom:4px}
+h2.section-title .lime{color:var(--lime)}
+h2.section-title.dark{color:var(--ink)}
+h2.section-title.dark .lime{color:var(--ink2)}
+.section-sub{font-size:.95rem;color:var(--gray);line-height:1.75;margin-top:10px;max-width:480px}
+.section-sub.dark{color:var(--gray2)}
+
+.courses-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:24px;margin-bottom:56px}
+.courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:2px}
+
+.course-card{background:var(--ink2);padding:36px;position:relative;transition:background .25s;overflow:hidden}
+.course-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--lime);transform:scaleX(0);transform-origin:left;transition:transform .3s}
+.course-card:hover{background:var(--ink3)}
+.course-card:hover::before{transform:scaleX(1)}
+.course-card.highlight{background:var(--lime)}
+.course-card.highlight::before{display:none}
+.course-num{font-family:var(--font-d);font-size:.72rem;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.2);margin-bottom:32px}
+.course-card.highlight .course-num{color:rgba(0,0,0,.25)}
+.course-icon{font-size:2.2rem;margin-bottom:20px}
+.course-name{font-family:var(--font-d);font-size:1.6rem;font-weight:800;color:var(--white);letter-spacing:-0.5px;margin-bottom:10px;line-height:1}
+.course-card.highlight .course-name{color:var(--ink)}
+.course-desc{font-size:.88rem;color:var(--gray);line-height:1.7;margin-bottom:28px}
+.course-card.highlight .course-desc{color:rgba(0,0,0,.55)}
+.course-footer{display:flex;justify-content:space-between;align-items:center;padding-top:20px;border-top:1px solid rgba(255,255,255,.07)}
+.course-card.highlight .course-footer{border-color:rgba(0,0,0,.12)}
+.course-price{font-family:var(--font-d);font-size:1.8rem;font-weight:800;color:var(--lime)}
+.course-card.highlight .course-price{color:var(--ink)}
+.course-tag{font-family:var(--font-d);font-size:.7rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.35);background:rgba(255,255,255,.06);padding:5px 12px;border-radius:2px}
+.course-card.highlight .course-tag{color:rgba(0,0,0,.45);background:rgba(0,0,0,.1)}
+
+/* WHY */
+#why{padding:120px 52px;background:var(--white)}
+.why-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;margin-top:64px}
+.why-features{display:flex;flex-direction:column;gap:0}
+.why-feat{display:flex;gap:20px;padding:28px 0;border-bottom:1px solid #e5e5e5;align-items:flex-start;transition:padding .2s}
+.why-feat:first-child{padding-top:0}
+.why-feat:last-child{border-bottom:none}
+.why-feat:hover{padding-left:8px}
+.why-feat-num{font-family:var(--font-d);font-size:2.5rem;font-weight:800;color:#e8e8e8;line-height:1;min-width:52px}
+.why-feat h3{font-family:var(--font-d);font-size:1.15rem;font-weight:700;color:var(--ink);margin-bottom:5px}
+.why-feat p{font-size:.88rem;color:var(--gray2);line-height:1.7}
+.why-visual{background:var(--ink);border-radius:16px;padding:48px;position:relative;overflow:hidden}
+.why-visual::before{content:'';position:absolute;top:-60px;right:-60px;width:250px;height:250px;background:var(--lime);border-radius:50%;opacity:.06}
+.why-big-num{font-family:var(--font-d);font-size:7rem;font-weight:800;color:var(--lime);line-height:1}
+.why-big-label{font-size:.88rem;color:rgba(255,255,255,.45);margin-top:6px;line-height:1.6;max-width:200px}
+.why-mini-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:28px}
+.why-mini{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);border-radius:8px;padding:18px}
+.why-mini .wn{font-family:var(--font-d);font-size:2rem;font-weight:800;color:var(--white);line-height:1}
+.why-mini .wl{font-size:.72rem;letter-spacing:1px;text-transform:uppercase;color:var(--gray);margin-top:4px}
+
+/* INSTRUCTOR */
+#instructors{padding:120px 52px;background:var(--ink2)}
+.inst-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px;margin-top:56px}
+.inst-card{background:var(--ink3);padding:40px;position:relative;transition:background .2s}
+.inst-card:hover{background:#252525}
+.inst-card.hire{background:transparent;border:1px dashed rgba(255,255,255,.15);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:14px}
+.inst-card.hire:hover{border-color:var(--lime)}
+.inst-photo-placeholder{width:64px;height:64px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;font-size:1.8rem;margin-bottom:20px}
+.inst-name{font-family:var(--font-d);font-size:1.4rem;font-weight:800;color:var(--white);letter-spacing:-0.5px}
+.inst-role{font-size:.8rem;color:var(--lime);font-weight:600;letter-spacing:1px;text-transform:uppercase;margin-top:4px}
+.inst-stars{color:var(--lime);font-size:1rem;letter-spacing:3px;margin-top:12px}
+.inst-quote{font-size:.88rem;color:var(--gray);line-height:1.7;margin-top:12px;font-style:italic}
+.hire-label{font-family:var(--font-d);font-size:1.2rem;font-weight:800;color:rgba(255,255,255,.5);letter-spacing:-0.5px}
+.hire-sub{font-size:.86rem;color:var(--gray);line-height:1.6}
+
+/* PRICING */
+#pricing{padding:120px 52px;background:var(--ink)}
+.pricing-wrap{display:grid;grid-template-columns:1fr 1fr;gap:2px;margin-top:56px;max-width:800px}
+.price-card{background:var(--ink2);padding:44px;position:relative;overflow:hidden;transition:background .2s}
+.price-card:hover{background:var(--ink3)}
+.price-card.featured{background:var(--lime)}
+.price-label{font-family:var(--font-d);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:16px}
+.price-card.featured .price-label{color:rgba(0,0,0,.45)}
+.price-amount{font-family:var(--font-d);font-size:5rem;font-weight:800;color:var(--white);line-height:1;letter-spacing:-2px}
+.price-card.featured .price-amount{color:var(--ink)}
+.price-amount sup{font-size:2rem;vertical-align:top;margin-top:.6rem;letter-spacing:0}
+.price-period{font-size:.82rem;color:var(--gray);margin:8px 0 28px;font-weight:500}
+.price-card.featured .price-period{color:rgba(0,0,0,.5)}
+.price-features{list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:36px}
+.price-features li{font-size:.88rem;color:rgba(255,255,255,.6);display:flex;align-items:center;gap:8px}
+.price-features li::before{content:'→';color:var(--lime);font-weight:700}
+.price-card.featured .price-features li{color:rgba(0,0,0,.6)}
+.price-card.featured .price-features li::before{color:var(--ink)}
+.btn-book{display:block;text-align:center;font-family:var(--font-d);font-size:.82rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:14px;border-radius:3px;text-decoration:none;transition:background .2s,color .2s}
+.btn-book-outline{border:1px solid rgba(255,255,255,.2);color:var(--white)}
+.btn-book-outline:hover{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.btn-book-dark{background:var(--ink);color:var(--white)}
+.btn-book-dark:hover{background:var(--ink2)}
+
+/* TESTIMONIALS */
+#testimonials{padding:120px 52px;background:var(--ink2);position:relative;overflow:hidden}
+.testi-bg{position:absolute;right:-40px;top:40px;font-family:var(--font-d);font-size:22rem;font-weight:800;color:rgba(202,255,0,.03);line-height:1;pointer-events:none}
+.testi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2px;margin-top:56px;position:relative;z-index:1}
+.testi-card{background:var(--ink3);padding:36px;transition:background .2s}
+.testi-card:hover{background:#252525}
+.testi-stars{color:var(--lime);font-size:.9rem;letter-spacing:3px;margin-bottom:16px}
+.testi-text{font-size:.92rem;color:rgba(255,255,255,.62);line-height:1.8;font-style:italic;margin-bottom:24px}
+.testi-source{display:flex;align-items:center;gap:10px}
+.testi-dot{width:36px;height:36px;border-radius:50%;background:var(--lime);display:flex;align-items:center;justify-content:center;font-family:var(--font-d);font-size:.75rem;font-weight:700;color:var(--ink)}
+.testi-label{font-family:var(--font-d);font-size:.78rem;font-weight:600;color:var(--white);letter-spacing:1px}
+.testi-sub{font-size:.72rem;color:var(--gray);margin-top:2px}
+.testi-cta{margin-top:48px;display:flex;justify-content:center;position:relative;z-index:1}
+
+/* JOIN */
+#join{padding:120px 52px;background:var(--ink)}
+.join-inner{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:64px}
+.join-perks{display:flex;flex-direction:column;gap:0}
+.join-perk{padding:24px 0;border-bottom:1px solid var(--border);display:flex;gap:16px;align-items:flex-start;transition:padding .2s}
+.join-perk:first-child{padding-top:0}
+.join-perk:last-child{border-bottom:none}
+.join-perk:hover{padding-left:6px}
+.jp-icon{width:40px;height:40px;background:rgba(202,255,0,.1);border:1px solid rgba(202,255,0,.2);border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.jp-title{font-family:var(--font-d);font-size:1rem;font-weight:700;color:var(--white);margin-bottom:4px}
+.jp-text{font-size:.86rem;color:var(--gray);line-height:1.65}
+.join-form-wrap{background:var(--lime);padding:48px;border-radius:4px;position:relative;overflow:hidden}
+.join-form-wrap::before{content:'JOIN';position:absolute;right:-20px;bottom:-20px;font-family:var(--font-d);font-size:10rem;font-weight:800;color:rgba(0,0,0,.06);line-height:1;pointer-events:none}
+.join-form-wrap h3{font-family:var(--font-d);font-size:1.8rem;font-weight:800;color:var(--ink);margin-bottom:22px;position:relative;z-index:1}
+.jform{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+.jform input,.jform select,.jform textarea{padding:13px 16px;border-radius:3px;border:2px solid rgba(0,0,0,.12);background:rgba(255,255,255,.6);color:var(--ink);font-family:var(--font-b);font-size:.9rem;outline:none;transition:border-color .2s,background .2s}
+.jform input:focus,.jform select:focus,.jform textarea:focus{border-color:var(--ink);background:white}
+.jform input::placeholder,.jform textarea::placeholder{color:rgba(0,0,0,.35)}
+.jform select option{background:white;color:var(--ink)}
+.jform textarea{resize:vertical}
+.jform button{background:var(--ink);color:var(--lime);font-family:var(--font-d);font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:15px;border-radius:3px;border:none;cursor:none;transition:background .2s}
+.jform button:hover{background:var(--ink2)}
+
+/* BOOK CTA */
+#book{background:var(--lime);padding:100px 52px;position:relative;overflow:hidden}
+#book::after{content:'GO';position:absolute;right:-20px;bottom:-40px;font-family:var(--font-d);font-size:28rem;font-weight:800;color:rgba(0,0,0,.06);line-height:.8;pointer-events:none}
+.book-inner{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center;position:relative;z-index:1}
+.book-copy h2{font-family:var(--font-d);font-size:clamp(2.8rem,5.5vw,5rem);font-weight:800;color:var(--ink);line-height:.92;letter-spacing:-1px;margin-bottom:18px}
+.book-copy p{font-size:.95rem;color:rgba(0,0,0,.55);line-height:1.7;margin-bottom:28px}
+.book-contact{display:flex;flex-direction:column;gap:8px}
+.book-contact a{color:var(--ink);text-decoration:none;font-size:.9rem;font-weight:600;display:flex;align-items:center;gap:8px;transition:opacity .2s}
+.book-contact a:hover{opacity:.6}
+.wa-btn{background:var(--ink)!important;color:var(--lime)!important;padding:14px 18px!important;border-radius:4px!important;font-family:var(--font-d)!important;font-size:.9rem!important;font-weight:700!important;letter-spacing:1px!important;display:flex!important;align-items:center!important;gap:10px!important;transition:background .2s!important;opacity:1!important}
+.wa-btn:hover{background:#222!important;opacity:1!important}
+.qr-wrap{background:rgba(0,0,0,.12);border-radius:8px;padding:18px;display:flex;flex-direction:column;align-items:flex-start;gap:8px;margin:6px 0}
+.qr-img{width:140px;height:140px;border-radius:6px;display:block}
+.qr-label{font-family:var(--font-d);font-size:.78rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(0,0,0,.6)}
+.qr-sub{font-size:.76rem;color:rgba(0,0,0,.45);font-weight:500}
+.bform{display:flex;flex-direction:column;gap:10px}
+.bform input,.bform select{padding:14px 18px;border-radius:3px;border:2px solid rgba(0,0,0,.15);background:rgba(255,255,255,.55);color:var(--ink);font-family:var(--font-b);font-size:.9rem;outline:none;transition:border-color .2s,background .2s}
+.bform input:focus,.bform select:focus{border-color:var(--ink);background:white}
+.bform input::placeholder{color:rgba(0,0,0,.35)}
+.bform select option{background:white;color:var(--ink)}
+.bform button{background:var(--ink);color:var(--lime);font-family:var(--font-d);font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:16px;border-radius:3px;border:none;cursor:none;transition:background .2s}
+.bform button:hover{background:var(--ink2)}
+
+/* FOOTER */
+footer{background:var(--ink);padding:72px 52px 36px;border-top:1px solid var(--border)}
+.footer-top{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:56px}
+.footer-logo-wrap{display:flex;align-items:center;gap:10px;margin-bottom:14px}
+.footer-dg{width:32px;height:32px;background:var(--lime);border-radius:4px;display:flex;align-items:center;justify-content:center}
+.footer-brand-name{font-family:var(--font-d);font-size:1.1rem;font-weight:800;color:var(--white);letter-spacing:2px}
+.footer-brand-name span{color:var(--lime)}
+.footer-tagline{font-family:var(--font-d);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--lime);margin-bottom:14px}
+.footer-brand p{font-size:.84rem;color:var(--gray);line-height:1.7;max-width:240px}
+.footer-socials{display:flex;gap:8px;margin-top:20px}
+.fsoc{width:36px;height:36px;background:var(--ink2);border:1px solid var(--border);border-radius:4px;display:flex;align-items:center;justify-content:center;text-decoration:none;color:var(--white);font-size:.85rem;transition:background .2s,border-color .2s}
+.fsoc:hover{background:var(--lime);border-color:var(--lime);color:var(--ink)}
+.footer-col h4{font-family:var(--font-d);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--white);margin-bottom:18px}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+.footer-col ul a{color:var(--gray);text-decoration:none;font-size:.84rem;transition:color .2s}
+.footer-col ul a:hover{color:var(--lime)}
+.footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:28px;border-top:1px solid var(--border);font-size:.78rem;color:var(--gray2);flex-wrap:wrap;gap:12px}
+.footer-bottom a{color:var(--lime);text-decoration:none}
+
+/* REVEAL */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .55s ease,transform .55s ease}
+.reveal.visible{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+
+/* MOBILE */
+@media(max-width:900px){
+  nav{padding:14px 18px}
+  .nav-links{display:none}
+  #hero{padding:0 18px 56px;min-height:100svh}
+  .hero-slash,.hero-slash-inner{display:none}
+  .hero-content{max-width:100%}
+  .hero-bg-text{display:none}
+  #courses,#why,#instructors,#pricing,#testimonials,#join,#book,footer{padding:72px 18px}
+  .why-grid,.join-inner,.book-inner,.footer-top{grid-template-columns:1fr;gap:36px}
+  .pricing-wrap{grid-template-columns:1fr;max-width:100%}
+  h1.hero-title{font-size:clamp(3.5rem,14vw,6rem)}
+}
+</style>
+</head>
+<body>
+<div id="cur"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="dg-mark">
+      <svg viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 4 L12 4 Q18 4 18 11 Q18 18 12 18 L4 18 Z" fill="none" stroke="#0A0A0A" stroke-width="2.5" stroke-linejoin="round"/>
+        <line x1="13" y1="11" x2="21" y2="11" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="17" y1="7" x2="21" y2="11" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+        <line x1="17" y1="15" x2="21" y2="11" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </div>
+    <div class="nav-brand">DRIVIN <span>GURU</span></div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#courses">Courses</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="instructors.html">Instructors — Join Us</a></li>
+    <li><a href="https://wa.me/447360271186?text=Hi" target="_blank" class="nav-wa"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.107 1.523 5.83L.057 23.25a.75.75 0 00.917.912l5.562-1.49A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 01-4.964-1.355l-.356-.211-3.683.987.974-3.596-.232-.371A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>Chat Now</a></li>
+    <li><a href="#book" class="nav-book">Book Now</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg-text">DG</div>
+  <div class="hero-slash"></div>
+  <div class="hero-slash-inner">
+    <!-- Car SVG on lime panel -->
+    <svg viewBox="0 0 520 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <ellipse cx="260" cy="225" rx="220" ry="13" fill="rgba(0,0,0,0.2)"/>
+      <path d="M60 170 Q65 122 125 104 L200 80 Q248 66 306 68 L392 74 Q448 78 476 104 L494 152 L494 188 Q494 198 484 198 L50 198 Q40 198 40 188 L40 172 Z" fill="#0A0A0A"/>
+      <path d="M143 104 Q176 65 218 58 L334 56 Q374 58 394 74" fill="#141414" stroke="#1a1a1a" stroke-width="1.5"/>
+      <path d="M158 102 Q180 69 218 62 L268 60 L263 102 Z" fill="rgba(202,255,0,.25)" stroke="rgba(202,255,0,.5)" stroke-width="1.5"/>
+      <path d="M272 60 L322 60 Q350 62 366 76 L370 102 L272 102 Z" fill="rgba(202,255,0,.25)" stroke="rgba(202,255,0,.5)" stroke-width="1.5"/>
+      <line x1="268" y1="62" x2="268" y2="174" stroke="rgba(0,0,0,.3)" stroke-width="1.5"/>
+      <line x1="370" y1="76" x2="374" y2="174" stroke="rgba(0,0,0,.3)" stroke-width="1.5"/>
+      <path d="M478 115 L498 133 L500 157 L478 154 Z" fill="#141414"/>
+      <rect x="482" y="130" width="18" height="11" rx="2" fill="rgba(202,255,0,.8)"/>
+      <path d="M42 140 L24 144 L22 158 L42 156 Z" fill="#141414"/>
+      <rect x="18" y="142" width="16" height="13" rx="2" fill="rgba(202,255,0,.8)"/>
+      <circle cx="140" cy="197" r="28" fill="#0d0d0d" stroke="#222" stroke-width="2.5"/>
+      <circle cx="140" cy="197" r="14" fill="#161616" stroke="rgba(202,255,0,.8)" stroke-width="1.5"/>
+      <circle cx="140" cy="197" r="4" fill="#CAFF00"/>
+      <circle cx="394" cy="197" r="28" fill="#0d0d0d" stroke="#222" stroke-width="2.5"/>
+      <circle cx="394" cy="197" r="14" fill="#161616" stroke="rgba(202,255,0,.8)" stroke-width="1.5"/>
+      <circle cx="394" cy="197" r="4" fill="#CAFF00"/>
+      <!-- motion lines -->
+      <line x1="0" y1="148" x2="38" y2="148" stroke="rgba(202,255,0,.4)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="0" y1="160" x2="28" y2="160" stroke="rgba(202,255,0,.2)" stroke-width="2" stroke-linecap="round"/>
+      <line x1="0" y1="172" x2="20" y2="172" stroke="rgba(202,255,0,.15)" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Nationwide · DVSA Approved · 100% Recommended</div>
+    <h1 class="hero-title">
+      <span class="outline">LEARN</span>
+      <span>THE</span>
+      <span class="lime">ROAD.</span>
+    </h1>
+    <div class="hero-tagline">Learn The Safe Way, Right Away</div>
+    <div class="hero-row">
+      <a href="#book" class="btn-lime">Book a Lesson ↗</a>
+      <a href="https://wa.me/447360271186?text=Hi" target="_blank" class="btn-wa-hero">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.107 1.523 5.83L.057 23.25a.75.75 0 00.917.912l5.562-1.49A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 01-4.964-1.355l-.356-.211-3.683.987.974-3.596-.232-.371A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+        Chat on WhatsApp
+      </a>
+      <a href="#courses" class="btn-wired">View Courses</a>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat"><div class="n">100%</div><div class="l">Recommend</div></div>
+      <div class="h-stat"><div class="n">★★★★★</div><div class="l">Highly Trusted</div></div>
+      <div class="h-stat"><div class="n">7</div><div class="l">Days a Week</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <div class="marquee-item">100% Recommend</div>
+    <div class="marquee-item">DVSA Approved</div>
+    <div class="marquee-item">Highly Trusted</div>
+    <div class="marquee-item">7 Days a Week</div>
+    <div class="marquee-item">Tailored Lessons</div>
+    <div class="marquee-item">Dual-Control Vehicles</div>
+    <div class="marquee-item">Rated & Recommended</div>
+    <div class="marquee-item">Learn The Safe Way, Right Away</div>
+    <div class="marquee-item">100% Recommend</div>
+    <div class="marquee-item">DVSA Approved</div>
+    <div class="marquee-item">Highly Trusted</div>
+    <div class="marquee-item">7 Days a Week</div>
+    <div class="marquee-item">Tailored Lessons</div>
+    <div class="marquee-item">Dual-Control Vehicles</div>
+    <div class="marquee-item">Rated & Recommended</div>
+    <div class="marquee-item">Learn The Safe Way, Right Away</div>
+  </div>
+</div>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="courses-header reveal">
+    <div>
+      <div class="section-eyebrow">What We Offer</div>
+      <h2 class="section-title">Pick Your <span class="lime">Course</span></h2>
+      <p class="section-sub">Every learner is different. Every lesson is tailored to you.</p>
+    </div>
+    <a href="#book" class="btn-lime">Book Today ↗</a>
+  </div>
+  <div class="courses-grid">
+    <div class="course-card reveal">
+      <div class="course-num">01</div>
+      <div class="course-icon">🚗</div>
+      <div class="course-name">Daytime Lesson</div>
+      <p class="course-desc">Your standard 60-minute lesson, Mon–Fri 8am–4pm. Fully tailored, fully focused, on the roads you'll actually be tested on.</p>
+      <div class="course-footer">
+        <div class="course-price">£40</div>
+        <div class="course-tag">Per Hour</div>
+      </div>
+    </div>
+    <div class="course-card highlight reveal">
+      <div class="course-num">02</div>
+      <div class="course-icon">🌙</div>
+      <div class="course-name">Evening & Weekend</div>
+      <p class="course-desc">Evenings from 4pm and all day Saturday & Sunday. Same expert instruction, perfect for learners with busy schedules.</p>
+      <div class="course-footer">
+        <div class="course-price">£50</div>
+        <div class="course-tag">Per Hour</div>
+      </div>
+    </div>
+    <div class="course-card reveal">
+      <div class="course-num">03</div>
+      <div class="course-icon">🎯</div>
+      <div class="course-name">Mock Test Session</div>
+      <p class="course-desc">A full 2-hour simulation of your driving test. Real routes, real pressure, honest feedback. Know exactly where you stand before the big day.</p>
+      <div class="course-footer">
+        <div class="course-price">£80</div>
+        <div class="course-tag">2 Hours</div>
+      </div>
+    </div>
+    <div class="course-card reveal">
+      <div class="course-num">04</div>
+      <div class="course-icon">⚡</div>
+      <div class="course-name">Intensive Course</div>
+      <p class="course-desc">Want to pass fast? Our intensive programme is structured to get you test-ready in weeks rather than months. Get in touch to discuss.</p>
+      <div class="course-footer">
+        <div class="course-price">Enquire</div>
+        <div class="course-tag">Bespoke</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY US -->
+<section id="why">
+  <div style="max-width:1100px;margin:0 auto;">
+    <div class="reveal">
+      <div class="section-eyebrow" style="color:var(--ink);--lime:var(--ink2)">
+        <span style="display:flex;align-items:center;gap:10px">
+          <span style="display:inline-block;width:24px;height:2px;background:var(--ink)"></span>
+          Why Drivin Guru
+        </span>
+      </div>
+      <h2 class="section-title dark">We Build <span class="lime" style="color:#CAFF00;-webkit-text-stroke:0">Confident</span><br>Drivers.</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-features">
+        <div class="why-feat reveal">
+          <div class="why-feat-num">01</div>
+          <div><h3>DVSA-Approved Instruction</h3><p>Fully certified, professional lessons that meet the highest national standards. Your safety comes first, always.</p></div>
+        </div>
+        <div class="why-feat reveal">
+          <div class="why-feat-num">02</div>
+          <div><h3>7 Days a Week Flexibility</h3><p>Morning, evening or weekends — lessons that slot into your life. Easy to book, easy to reschedule.</p></div>
+        </div>
+        <div class="why-feat reveal">
+          <div class="why-feat-num">03</div>
+          <div><h3>Local Road Knowledge</h3><p>Every lesson uses the roads you'll actually be tested on. No surprises on test day — just confidence.</p></div>
+        </div>
+        <div class="why-feat reveal">
+          <div class="why-feat-num">04</div>
+          <div><h3>Truly Tailored to You</h3><p>Your pace, your style, your learning needs. No rigid plans — just instruction that actually works for you.</p></div>
+        </div>
+      </div>
+      <div class="why-visual reveal">
+        <div class="why-big-num">100%</div>
+        <p class="why-big-label" style="color:rgba(255,255,255,.45);font-size:.88rem;margin-top:6px;line-height:1.6;">of students recommend Drivin Guru — verified on Google and Facebook.</p>
+        <div class="why-mini-grid">
+          <div class="why-mini"><div class="wn">★★★★★</div><div class="wl">Highly Trusted</div></div>
+          <div class="why-mini"><div class="wn">£40</div><div class="wl">From per hour</div></div>
+          <div class="why-mini"><div class="wn">7</div><div class="wl">Days a week</div></div>
+          <div class="why-mini"><div class="wn">UK</div><div class="wl">Wide Network</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUCTORS -->
+<section id="instructors">
+  <div class="reveal">
+    <div class="section-eyebrow">Our Instructors</div>
+    <h2 class="section-title">You're in <span class="lime">Good Hands</span></h2>
+    <p class="section-sub">Expert, DVSA-approved instructors who care about your progress.</p>
+  </div>
+  <div class="inst-grid">
+    <div class="inst-card reveal">
+      <div class="inst-photo-placeholder">🧑‍🏫</div>
+      <div class="inst-name">Drivin Guru Instructor</div>
+      <div class="inst-role">DVSA Approved · Nationwide</div>
+      <div class="inst-stars">★★★★★</div>
+      <p class="inst-quote">"Lessons adapted to my needs — everything made so simple. Really easy to get along with. Passed first time!"</p>
+    </div>
+    <div class="inst-card hire reveal">
+      <div style="font-size:2rem;color:var(--lime)">+</div>
+      <div class="hire-label">Instructors Wanted<br/>Nationwide</div>
+      <p class="hire-sub">Qualified ADIs across the UK — join a fast-growing driving school with real marketing behind you.</p>
+      <a href="instructors.html" class="btn-lime" style="margin-top:4px;font-size:.8rem;padding:12px 24px">Apply Now ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing">
+  <div class="reveal">
+    <div class="section-eyebrow">Pricing</div>
+    <h2 class="section-title">Simple. <span class="lime">Honest.</span></h2>
+    <p class="section-sub">No hidden fees. No nasty surprises. Ever.</p>
+  </div>
+  <div class="pricing-wrap">
+    <div class="price-card reveal">
+      <div class="price-label">Daytime</div>
+      <div class="price-amount"><sup>£</sup>40</div>
+      <div class="price-period">Per hour · Mon–Fri 8am–4pm</div>
+      <ul class="price-features">
+        <li>60-min in-car lesson</li>
+        <li>DVSA-approved instruction</li>
+        <li>Tailored to your level</li>
+        <li>Local road knowledge</li>
+      </ul>
+      <a href="#book" class="btn-book btn-book-outline">Book Now</a>
+    </div>
+    <div class="price-card featured reveal">
+      <div class="price-label">Evening & Weekend</div>
+      <div class="price-amount"><sup>£</sup>50</div>
+      <div class="price-period">Per hour · evenings & all weekend</div>
+      <ul class="price-features">
+        <li>Mon–Fri from 4pm</li>
+        <li>All day Saturday & Sunday</li>
+        <li>Same expert tuition</li>
+        <li>Perfect for busy learners</li>
+      </ul>
+      <a href="#book" class="btn-book btn-book-dark">Book Now</a>
+    </div>
+  </div>
+  <div style="margin-top:2px;background:var(--ink2);padding:28px 36px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;" class="reveal">
+    <div>
+      <div style="font-family:var(--font-d);font-size:1.1rem;font-weight:700;color:var(--white)">Mock Test Session</div>
+      <div style="font-size:.84rem;color:var(--gray);margin-top:3px">2-hour full test simulation — honest feedback before your real test</div>
+    </div>
+    <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+      <div style="font-family:var(--font-d);font-size:2rem;font-weight:800;color:var(--lime)">£80</div>
+      <a href="#book" class="btn-lime" style="font-size:.8rem;padding:12px 24px">Book Now ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="testi-bg">"</div>
+  <div class="reveal">
+    <div class="section-eyebrow">Student Reviews</div>
+    <h2 class="section-title">100% <span class="lime">Recommend</span></h2>
+    <p class="section-sub">Verified Google reviews from real students.</p>
+  </div>
+  <div class="testi-grid">
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Absolutely amazing instruction! My lessons were adapted to my learning needs and everything was made so simple. Time on lessons was well spent and my instructor was really easy to get along with. Passed first time. Highest recommendations!"</p>
+      <div class="testi-source">
+        <div class="testi-dot">G</div>
+        <div><div class="testi-label">Google Review</div><div class="testi-sub">Verified · 5 Stars</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Can not recommend Drivin Guru enough. My instructor made the whole learning experience really fun, whilst teaching me every single thing I needed to know, and then some. I'm so grateful for the patience and determination. 5 stars all day."</p>
+      <div class="testi-source">
+        <div class="testi-dot">G</div>
+        <div><div class="testi-label">Google Review</div><div class="testi-sub">Verified · 5 Stars</div></div>
+      </div>
+    </div>
+    <div class="testi-card reveal">
+      <div class="testi-stars">★★★★★</div>
+      <p class="testi-text">"Excellent support — my instructor recognised my needs and showed me all the difficult places and situations. That's why I passed my test on the first attempt. Thank you very much, highly recommended."</p>
+      <div class="testi-source">
+        <div class="testi-dot">G</div>
+        <div><div class="testi-label">Google Review</div><div class="testi-sub">Verified · 5 Stars</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="testi-cta reveal">
+    <a href="https://www.google.com/search?q=Drivin+Guru+St+Helens" target="_blank" class="btn-wired">Read Our Reviews on Google ↗</a>
+  </div>
+</section>
+
+<!-- JOIN BANNER -->
+<section id="join" style="padding:80px 52px;background:var(--lime);position:relative;overflow:hidden">
+  <div style="position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-family:var(--font-d);font-size:20rem;font-weight:800;color:rgba(0,0,0,.06);line-height:1;pointer-events:none;white-space:nowrap">ADI</div>
+  <div style="display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;position:relative;z-index:1;flex-wrap:wrap" class="reveal">
+    <div>
+      <div style="font-family:var(--font-d);font-size:.72rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:rgba(0,0,0,.45);margin-bottom:12px;display:flex;align-items:center;gap:8px"><span style="display:inline-block;width:20px;height:2px;background:rgba(0,0,0,.3)"></span>Nationwide Recruitment</div>
+      <h2 style="font-family:var(--font-d);font-size:clamp(2.2rem,4.5vw,3.8rem);font-weight:800;color:var(--ink);line-height:1;letter-spacing:-1px;margin-bottom:12px">Are You a Driving Instructor?<br/>Join the Drivin Guru Team.</h2>
+      <p style="font-size:.95rem;color:rgba(0,0,0,.55);line-height:1.7;max-width:540px">We're building a nationwide network of ADIs across the UK. You teach — we handle the marketing, bookings and brand. Any area. Any hours. Genuinely fair pay.</p>
+      <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap">
+        <div style="background:rgba(0,0,0,.08);padding:12px 18px;border-radius:3px;font-family:var(--font-d);font-size:.82rem;font-weight:700;color:rgba(0,0,0,.6);letter-spacing:1px">✓ ADIs & PDIs Welcome</div>
+        <div style="background:rgba(0,0,0,.08);padding:12px 18px;border-radius:3px;font-family:var(--font-d);font-size:.82rem;font-weight:700;color:rgba(0,0,0,.6);letter-spacing:1px">✓ Any Location in the UK</div>
+        <div style="background:rgba(0,0,0,.08);padding:12px 18px;border-radius:3px;font-family:var(--font-d);font-size:.82rem;font-weight:700;color:rgba(0,0,0,.6);letter-spacing:1px">✓ Self Employed</div>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:10px;min-width:180px">
+      <a href="instructors.html" style="background:var(--ink);color:var(--lime);font-family:var(--font-d);font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:18px 28px;border-radius:4px;text-decoration:none;display:flex;align-items:center;gap:8px;white-space:nowrap;transition:background .2s">Find Out More ↗</a>
+      <a href="instructors.html#apply" style="background:rgba(0,0,0,.12);color:var(--ink);font-family:var(--font-d);font-size:.9rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:18px 28px;border-radius:4px;text-decoration:none;display:flex;align-items:center;gap:8px;white-space:nowrap;transition:background .2s">Apply Now ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- BOOK -->
+<section id="book">
+  <div class="book-inner">
+    <div class="book-copy">
+      <h2>READY TO HIT THE ROAD?</h2>
+      <p>Book your first lesson today. No pressure, no commitment — just expert instruction when it suits you.</p>
+      <div class="book-contact">
+        <a href="https://wa.me/447360271186?text=Hi" target="_blank" class="wa-btn">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.117.554 4.107 1.523 5.83L.057 23.25a.75.75 0 00.917.912l5.562-1.49A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.75a9.73 9.73 0 01-4.964-1.355l-.356-.211-3.683.987.974-3.596-.232-.371A9.718 9.718 0 012.25 12C2.25 6.615 6.615 2.25 12 2.25S21.75 6.615 21.75 12 17.385 21.75 12 21.75z"/></svg>
+          Chat With Our AI on WhatsApp
+        </a>
+        <div class="qr-wrap">
+          <div class="qr-label">📱 Scan to Chat Instantly</div>
+          <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://wa.me/447360271186%3Ftext%3DHi&bgcolor=CAFF00&color=0A0A0A&margin=2" alt="WhatsApp QR Code" class="qr-img"/>
+          <div class="qr-sub">Scan with your phone — opens WhatsApp instantly</div>
+        </div>
+        <a href="tel:+447939515479">📞 +44 7939 515479</a>
+        <a href="/cdn-cgi/l/email-protection#f49b92929d979d959890869d829d9a93818681b49399959d98da979b99">✉️ <span class="__cf_email__" data-cfemail="3f505959565c565e535b4d56495651584a4d4a7f58525e5653115c5052">[email&#160;protected]</span></a>
+        <a href="https://www.facebook.com/share/1CNxLhhBnh/?mibextid=wwXIfr" target="_blank">📘 Drivin Guru on Facebook</a>
+        <a href="https://www.instagram.com/drivin_guru/" target="_blank">📸 @drivin_guru on Instagram</a>
+      </div>
+    </div>
+    <div class="bform">
+      <input type="text" placeholder="Your Full Name"/>
+      <input type="tel" placeholder="Phone Number"/>
+      <input type="email" placeholder="Email Address"/>
+      <select><option value="" disabled selected>Select a Lesson Type</option><option>Daytime Lesson — £40/hr</option><option>Evening / Weekend — £50/hr</option><option>Mock Test Session — £80</option><option>Intensive Course — Enquire</option></select>
+      <button type="button">Reserve My Spot ↗</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="footer-logo-wrap">
+        <div class="footer-dg">
+          <svg viewBox="0 0 22 22" fill="none" width="18" height="18">
+            <path d="M4 4 L12 4 Q18 4 18 11 Q18 18 12 18 L4 18 Z" fill="none" stroke="#0A0A0A" stroke-width="2.5" stroke-linejoin="round"/>
+            <line x1="13" y1="11" x2="21" y2="11" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="17" y1="7" x2="21" y2="11" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="17" y1="15" x2="21" y2="11" stroke="#0A0A0A" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div class="footer-brand-name">DRIVIN <span>GURU</span></div>
+      </div>
+      <div class="footer-tagline">Learn The Safe Way, Right Away</div>
+      <p>Professional driving lessons nationwide. Building confident, capable drivers across the UK.</p>
+      <div class="footer-socials">
+        <a class="fsoc" href="https://www.facebook.com/share/1CNxLhhBnh/?mibextid=wwXIfr" target="_blank">f</a>
+        <a class="fsoc" href="https://www.instagram.com/drivin_guru/" target="_blank">ig</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Lessons</h4>
+      <ul>
+        <li><a href="#courses">Daytime — £40/hr</a></li>
+        <li><a href="#courses">Evening/Weekend — £50/hr</a></li>
+        <li><a href="#courses">Mock Test — £80</a></li>
+        <li><a href="#courses">Intensive Course</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#why">About Us</a></li>
+        <li><a href="#testimonials">Reviews</a></li>
+        <li><a href="instructors.html">Join Our Team</a></li>
+        <li><a href="#book">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="tel:+447939515479">+44 7939 515479</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#066960606f656f676a62746f706f686173747346616b676f6a2865696b"><span class="__cf_email__" data-cfemail="94fbf2f2fdf7fdf5f8f0e6fde2fdfaf3e1e6e1d4f3f9f5fdf8baf7fbf9">[email&#160;protected]</span></a></li>
+        <li><a href="#">United Kingdom</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Drivin Guru Driving School · United Kingdom</span>
+    <span><a href="#">Privacy Policy</a> · <a href="#">Terms</a></span>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  // Cursor
+  const cur = document.getElementById('cur');
+  document.addEventListener('mousemove', e => { cur.style.left = e.clientX+'px'; cur.style.top = e.clientY+'px'; });
+  document.querySelectorAll('a,button,input,select,textarea').forEach(el => {
+    el.addEventListener('mouseenter', () => cur.classList.add('h'));
+    el.addEventListener('mouseleave', () => cur.classList.remove('h'));
+  });
+
+  // Scroll reveal
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Stagger
+  document.querySelectorAll('.courses-grid,.testi-grid,.why-features,.join-perks,.inst-grid,.pricing-wrap').forEach(g => {
+    g.querySelectorAll('.reveal').forEach((el,i) => { el.style.transitionDelay = (i*0.1)+'s'; });
+  });
+</script>
+</body>
+</html>
